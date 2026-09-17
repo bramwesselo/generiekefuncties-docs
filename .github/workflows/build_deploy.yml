@@ -50,7 +50,8 @@ jobs:
           server: www784.your-server.de
           username: ${{ secrets.SFTP_USERNAME }}
           password: ${{ secrets.SFTP_PASSWORD }}
-          port: 22
+          protocol: ftps
+          port: 21
           local-dir: ./output/
           server-dir: public_html/gf/
-          timeout: 12000
+          timeout: 60000
