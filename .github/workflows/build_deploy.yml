@@ -51,6 +51,6 @@ jobs:
           username: ${{ secrets.SFTP_USERNAME }}
           password: ${{ secrets.SFTP_PASSWORD }}
           protocol: ftps
-          local_dir: './output/'
+          local_dir: './output/output/'
           server_dir: 'public_html/gf/'
           dangerous-clean-slate: true
