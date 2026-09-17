@@ -45,13 +45,12 @@ jobs:
             -v ${{ github.workspace }}/sushi-config.yaml:/app/sushi-config.yaml \
             localhost:5000/nuts-foundation/publisher:latest
       - name: Deploy to gf.afsprakenstelsel.nl
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
           server: www784.your-server.de
-          port: 222
           username: ${{ secrets.SFTP_USERNAME }}
           password: ${{ secrets.SFTP_PASSWORD }}
-          local_path: './output/*'
-          remote_path: '/public_html/gf'
-          sftp_only: false
-          delete_remote_files: true
+          protocol: ftps
+          local_dir: './output/'
+          server_dir: 'public_html/gf/'
+          dangerous-clean-slate: true
