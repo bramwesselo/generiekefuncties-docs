@@ -52,4 +52,4 @@ jobs:
           password: ${{ secrets.SFTP_PASSWORD }}
           protocol: ftps
           local-dir: './output/'
-          server-dir: './public_html/gf/'
+          server-dir: 'public_html/gf/'
