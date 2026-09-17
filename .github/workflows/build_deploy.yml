@@ -32,7 +32,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: localhost:5000/nuts-foundation/publisher:latest
+          tags: localhost:5000/fhir/publisher:${{ github.sha }}
       - name: Checkout
         uses: actions/checkout@v4
       - name: Build
@@ -43,13 +43,15 @@ jobs:
             -v ${{ github.workspace }}/output:/app/output \
             -v ${{ github.workspace }}/ig.ini:/app/ig.ini \
             -v ${{ github.workspace }}/sushi-config.yaml:/app/sushi-config.yaml \
-            localhost:5000/nuts-foundation/publisher:latest
+            localhost:5000/fhir/publisher:${{ github.sha }}
       - name: Deploy to gf.afsprakenstelsel.nl
         uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
           server: www784.your-server.de
           username: ${{ secrets.SFTP_USERNAME }}
           password: ${{ secrets.SFTP_PASSWORD }}
-          protocol: ftps
-          local-dir: './output/'
-          server-dir: 'public_html/gf/'
+          protocol: sftp
+          port: 22
+          local-dir: ./output/
+          server-dir: public_html/gf/
+          timeout: 12000
